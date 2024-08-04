@@ -1,11 +1,5 @@
-# Use a lightweight Python image as the base
-FROM python:3.9-slim
+FROM ct2034/ubuntu-desktop-arm64-vnc
 
-# Copy the Python script into the Docker image
-COPY check_architecture.py /app/check_architecture.py
+EXPOSE 5901
 
-# Set the working directory
-WORKDIR /app
-
-# Run the Python script
-CMD ["python", "check_architecture.py"]
+CMD ["supervisord", "-n"]
