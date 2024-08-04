@@ -1,11 +1,11 @@
-# Use the dorowu/ubuntu-desktop-lxde-vnc as a base image
-FROM dorowu/ubuntu-desktop-lxde-vnc
+# Use a lightweight Python image as the base
+FROM python:3.9-slim
 
-# Ensure the /startup.sh file is executable
-RUN chmod +x /startup.sh
+# Copy the Python script into the Docker image
+COPY check_architecture.py /app/check_architecture.py
 
-# Expose port 80 for the VNC server
-EXPOSE 80
+# Set the working directory
+WORKDIR /app
 
-# Command to run when starting the container
-CMD ["supervisord", "-n"]
+# Run the Python script
+CMD ["python", "check_architecture.py"]
